@@ -29,8 +29,8 @@ errorFiles = ['toSmall.wav', 'toBig.wav']
 
 def read_serial(ser):
     global available
-    if ~available:
-        return
+    # if ~available:
+    #     return
     print("Reading.....")
     while available:
         reading = ser.readline().decode("utf-8")
