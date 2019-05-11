@@ -19,7 +19,7 @@ except:
     sys.exit("Unable to establish connection at COM port")
 
 CHUNK = 1024
-audio_file_path = os.path.dirname(os.path.abspath(__file__))+ r"\audio\\"       # r"C:\Users\bramd\Desktop\MTBE\Lotte\\"
+audio_file_path = os.path.dirname(os.path.abspath(__file__))+ r"audio"       # r"C:\Users\bramd\Desktop\MTBE\Lotte\\"
 
 
 
