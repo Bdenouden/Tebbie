@@ -6,6 +6,8 @@ import os
 import sys
 from random import randint
 
+available = True
+
 if len(sys.argv)>=2:    #check if a com port has been given as argument, else take com 6
     port = sys.argv[1]
 else:
@@ -27,8 +29,9 @@ files = ['01_plakband.wav', '02_WHscream.wav', '03_godveredomme.wav', '04_FACK.w
 errorFiles = ['toSmall.wav', 'toBig.wav']
 
 def read_serial(ser):
+    global available
     print("Reading.....")
-    while True:
+    while available:
         reading = ser.readline().decode("utf-8")
         if reading != '':
              print(reading)
@@ -40,6 +43,8 @@ def read_serial(ser):
 
 
 def play(audio_file):
+    global available
+    available = False
     wf = wave.open(audio_file, 'rb')
     p = pyaudio.PyAudio()
     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
@@ -53,6 +58,7 @@ def play(audio_file):
     stream.stop_stream()
     stream.close()
     p.terminate()
+    available=True
 
 
 thread = threading.Thread(target=read_serial, args=(serial_port,))
