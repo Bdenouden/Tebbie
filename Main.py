@@ -23,7 +23,7 @@ except:
 CHUNK = 1024
 audio_file_path = os.path.dirname(os.path.abspath(__file__)) + r"/audio/"  # r"C:\Users\bramd\Desktop\MTBE\Lotte\\"
 
-files = ['01_plakband.wav', '02_WHscream.wav', '03_godveredomme.wav', '04_FACK.wav', '05_FAAAAAACK.wav']
+files = ['01_plakband.wav', '02_WHscream.wav', '03_godveredomme.wav', '04_FACK.wav', '05_FAAAAAACK.wav','06_tanken.wav','07_godgodveredomme.wav','08_dikkeBMW.wav']
 errorFiles = ['toSmall.wav', 'toBig.wav']
 
 
