@@ -9,7 +9,7 @@ from random import randint
 if len(sys.argv)>=2:    #check if a com port has been given as argument, else take com 6
     port = sys.argv[1]
 else:
-    port = 'ttyUSB0'
+    port = '/dev/ttyUSB0'
 
 print("port = " + port)
 baud = 115200
