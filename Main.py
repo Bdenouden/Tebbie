@@ -29,8 +29,6 @@ errorFiles = ['toSmall.wav', 'toBig.wav']
 
 def read_serial(ser):
     global available
-    # if ~available:
-    #     return
     print("Reading.....")
     while available:
         try:
