@@ -6,10 +6,12 @@ import os
 import sys
 from random import randint
 
-if len(sys.argv)>=2:    #check if a com port has been given as argument, else take com 6
+available = True
+
+if len(sys.argv) >= 2:  # check if a com port has been given as argument, else take com 6
     port = sys.argv[1]
 else:
-    port = 'COM7'
+    port = '/dev/ttyUSB0'
 
 print("port = " + port)
 baud = 115200
@@ -19,29 +21,33 @@ except:
     sys.exit("Unable to establish connection at COM port")
 
 CHUNK = 1024
-audio_file_path = os.path.dirname(os.path.abspath(__file__))+ r"\audio\\"       # r"C:\Users\bramd\Desktop\MTBE\Lotte\\"
+audio_file_path = os.path.dirname(os.path.abspath(__file__)) + r"/audio/"  # r"C:\Users\bramd\Desktop\MTBE\Lotte\\"
 
-
-
-files = ['0.wav', '1.wav', '2.wav', '3.wav', '4.wav', '5.wav', '6.wav', '7.wav', '8.wav', '9.wav', '10.wav',
-         '11.wav', '12.wav', '13.wav', '14.wav', '15.wav', '16.wav', '17.wav', '18.wav', '19.wav', '20.wav',
-         '21.wav', '22.wav', '23.wav', '24.wav', '25.wav', '26.wav', '27.wav', '28.wav', '29.wav', '30.wav']
+files = ['01_plakband.wav', '02_WHscream.wav', '03_godveredomme.wav', '04_FACK.wav', '05_FAAAAAACK.wav','06_tanken.wav','07_godgodveredomme.wav','08_dikkeBMW.wav']
 errorFiles = ['toSmall.wav', 'toBig.wav']
 
+
 def read_serial(ser):
+    global available
     print("Reading.....")
-    while True:
-        reading = ser.readline().decode("utf-8")
+    while available:
+        try:
+            reading = ser.readline().decode("utf-8")
+        except:
+            exit("Serial disconnect")
+
         if reading != '':
-             print(reading)
+            print(reading)
         if 'BIEM' in reading:
             print("DING!")
-            selected = randint(0, len(files)-1)
+            selected = randint(0, len(files) - 1)
             print(selected)
             play(audio_file_path + files[selected])
 
 
 def play(audio_file):
+    global available
+    available = False
     wf = wave.open(audio_file, 'rb')
     p = pyaudio.PyAudio()
     stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
@@ -55,6 +61,7 @@ def play(audio_file):
     stream.stop_stream()
     stream.close()
     p.terminate()
+    available = True
 
 
 thread = threading.Thread(target=read_serial, args=(serial_port,))
