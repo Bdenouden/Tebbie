@@ -23,9 +23,7 @@ audio_file_path = os.path.dirname(os.path.abspath(__file__))+ r"\audio\\"       
 
 
 
-files = ['0.wav', '1.wav', '2.wav', '3.wav', '4.wav', '5.wav', '6.wav', '7.wav', '8.wav', '9.wav', '10.wav',
-         '11.wav', '12.wav', '13.wav', '14.wav', '15.wav', '16.wav', '17.wav', '18.wav', '19.wav', '20.wav',
-         '21.wav', '22.wav', '23.wav', '24.wav', '25.wav', '26.wav', '27.wav', '28.wav', '29.wav', '30.wav']
+files = ['01_plakband.wav', '02_WHscream.wav', '03_godveredomme.wav', '04_FACK.wav', '05_FAAAAAACK.wav']
 errorFiles = ['toSmall.wav', 'toBig.wav']
 
 def read_serial(ser):
