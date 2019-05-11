@@ -33,7 +33,11 @@ def read_serial(ser):
     #     return
     print("Reading.....")
     while available:
-        reading = ser.readline().decode("utf-8")
+        try:
+            reading = ser.readline().decode("utf-8")
+        except:
+            exit("Serial disconnect")
+
         if reading != '':
             print(reading)
         if 'BIEM' in reading:
